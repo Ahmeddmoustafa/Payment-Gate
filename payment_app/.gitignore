@@ -16,6 +16,15 @@ migrate_working_dir/
 *.iws
 .idea/
 
+# Ignore a specific file
+payment_constants.dart
+
+# Ignore all files with a .log extension
+*.log
+
+# Ignore all files in a specific directory
+PaymentConstants/
+
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
