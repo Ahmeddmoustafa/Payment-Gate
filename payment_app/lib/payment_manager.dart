@@ -9,7 +9,7 @@ class PaymentManager {
       final url = await _payWithWalet(token);
       return url;
     } catch (err) {
-      print("err is $err");
+      // print("err is $err");
       return Future.value("error $err");
     }
   }
@@ -47,8 +47,8 @@ class PaymentManager {
       ///************************************************////
       return paymentKey;
     } catch (e) {
-      print("EXCEPTION *******************************");
-      print(e.toString());
+      // print("EXCEPTION *******************************");
+      // print(e.toString());
       throw Exception();
     }
   }
@@ -58,7 +58,7 @@ class PaymentManager {
       "https://accept.paymob.com/api/auth/tokens",
       data: {"api_key": PaymentConstants.apiKey},
     );
-    print('step 1 ${response.data["token"]}');
+    // print('step 1 ${response.data["token"]}');
     return response.data["token"];
   }
 
@@ -76,7 +76,7 @@ class PaymentManager {
         "items": [],
       },
     );
-    print('step 2 ${response.data["id"]}');
+    // print('step 2 ${response.data["id"]}');
     return response.data["id"];
   }
 
@@ -112,7 +112,7 @@ class PaymentManager {
         "integration_id": method,
       },
     );
-    print('step 3 ${response.data["token"]}');
+    // print('step 3 ${response.data["token"]}');
     return response.data["token"];
   }
   //******************* PAY WITH VODAFONE ************** */
