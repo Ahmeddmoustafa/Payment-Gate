@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:payment_app/Presentation/Home/history_item.dart';
 import 'package:payment_app/Presentation/Home/history_list.dart';
 import 'package:payment_app/Presentation/Home/payment_carousel.dart';
 import 'package:payment_app/Resources/Managers/colors_manager.dart';

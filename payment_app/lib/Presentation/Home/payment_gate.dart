@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:payment_app/Resources/Managers/assets_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:payment_app/Cubit/payment_cubit.dart';
 import 'package:payment_app/Resources/Managers/colors_manager.dart';
+import 'package:payment_app/Resources/Managers/routes_manager.dart';
 import 'package:payment_app/Resources/Managers/values_manager.dart';
 
 class PaymentWay extends StatelessWidget {
@@ -11,7 +13,7 @@ class PaymentWay extends StatelessWidget {
     required this.paymentID,
   });
   final String paymentName;
-  final Color paymentImage;
+  final String paymentImage;
   final int paymentID;
 
   @override
@@ -19,28 +21,39 @@ class PaymentWay extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
+    final PaymentCubit paymentcubit = context.read<PaymentCubit>();
 
-    return Center(
-      child: Container(
-        width: width * 0.8,
-        height: height * 0.3,
-        decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.LightSilver),
-          // color: paymentImage,
-          borderRadius: BorderRadius.circular(
-            AppSize.s10,
+    return GestureDetector(
+      onTap: () {
+        paymentcubit.selectPaymentGate(paymentID);
+        Navigator.pushNamed(context, Routes.paymentMethodRoute);
+      },
+      child: Center(
+        child: Container(
+          width: width * 0.8,
+          height: height * 0.3,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: ColorManager.LightSilver,
+            ),
+            // color: paymentImage,
+            borderRadius: BorderRadius.circular(
+              AppSize.s10,
+            ),
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage(
+                paymentImage,
+              ),
+            ),
           ),
-          image: const DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage(AssetsManager.stripeImage),
-          ),
+          // child: Center(
+          //   child: Text(
+          //     paymentName,
+          //     style: textTheme.displaySmall,
+          //   ),
+          // ),
         ),
-        // child: Center(
-        //   child: Text(
-        //     paymentName,
-        //     style: textTheme.displaySmall,
-        //   ),
-        // ),
       ),
     );
   }

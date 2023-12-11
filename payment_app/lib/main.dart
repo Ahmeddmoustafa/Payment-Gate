@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:payment_app/Presentation/Home/home_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:payment_app/Cubit/payment_cubit.dart';
 import 'package:payment_app/Resources/Managers/routes_manager.dart';
 import 'package:payment_app/Resources/Theme/theme_data.dart';
 
@@ -13,13 +14,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Payment App',
-      theme: getApplicationtheme(false),
-      onGenerateRoute: RouteGenerator.getRoute,
-      initialRoute: Routes.mainRoute,
-      // home: const HomePage(),
+    return BlocProvider(
+      create: (context) => PaymentCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Payment App',
+        theme: getApplicationtheme(false),
+        onGenerateRoute: RouteGenerator.getRoute,
+        initialRoute: Routes.mainRoute,
+        // home: const HomePage(),
+      ),
     );
   }
 }

@@ -8,7 +8,7 @@ class HistoryItem extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
-    return Container(
+    return SizedBox(
       height: height * 0.1,
       width: width,
       child: Column(
@@ -42,7 +42,7 @@ class HistoryItem extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 2,
             child: Divider(
               height: 1,

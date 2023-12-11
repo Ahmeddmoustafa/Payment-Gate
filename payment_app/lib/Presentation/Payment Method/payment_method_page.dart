@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:payment_app/Models/payment_gate_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:payment_app/Cubit/payment_cubit.dart';
 import 'package:payment_app/Models/payment_method_model.dart';
 import 'package:payment_app/Presentation/Home/history_list.dart';
 import 'package:payment_app/Presentation/Payment%20Method/payment_method.dart';
+import 'package:payment_app/Presentation/Payment%20Method/payment_method_list.dart';
 import 'package:payment_app/Resources/Managers/colors_manager.dart';
 import 'package:payment_app/Resources/Managers/values_manager.dart';
 
@@ -19,6 +21,8 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
+    final PaymentCubit paymentcubit = context.read<PaymentCubit>();
+
     return Scaffold(
       appBar: AppBar(
         // centerTitle: true,
@@ -30,8 +34,8 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
             color: Colors.black,
           ),
         ),
-        title: const Text(
-          "PayMob",
+        title: Text(
+          paymentcubit.selectedGate.paymentName,
         ),
         actions: [
           Padding(
@@ -57,9 +61,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: AppSize.s10),
-                child: PaymentMethod(
-                  paymentMethod: VisaModel(),
-                ),
+                child: const PaymentMethodList(),
               ),
               Text(
                 "Account History",

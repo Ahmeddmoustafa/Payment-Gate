@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:payment_app/PaymentConstants/payment_constants.dart';
 
-class PaymentManager {
+class PaymobManager {
   Future<String> payWithWallet(int amount, String currency) async {
     try {
       final token = await _getPaymentToken(
-          amount, currency, PaymentConstants.paymentWalletId);
+          amount, currency, PaymobConstants.paymentWalletId);
       final url = await _payWithWalet(token);
       return url;
     } catch (err) {
@@ -18,7 +18,7 @@ class PaymentManager {
     final key = await _getPaymentToken(
       amount,
       currency,
-      PaymentConstants.paymentCardId,
+      PaymobConstants.paymentCardId,
     );
     return key;
   }
@@ -56,7 +56,7 @@ class PaymentManager {
   Future<String> _getAuthToken() async {
     final Response response = await Dio().post(
       "https://accept.paymob.com/api/auth/tokens",
-      data: {"api_key": PaymentConstants.apiKey},
+      data: {"api_key": PaymobConstants.apiKey},
     );
     // print('step 1 ${response.data["token"]}');
     return response.data["token"];

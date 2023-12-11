@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:payment_app/Cubit/payment_cubit.dart';
 import 'package:payment_app/Presentation/Home/payment_gate.dart';
 import 'package:payment_app/Resources/Managers/colors_manager.dart';
 import 'package:payment_app/Resources/Managers/routes_manager.dart';
@@ -34,19 +36,18 @@ class _PaymentCarouselState extends State<PaymentCarousel> {
   ];
   @override
   Widget build(BuildContext context) {
+    final PaymentCubit paymentcubit = context.read<PaymentCubit>();
     return Stack(
       children: [
         GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, Routes.paymentMethodRoute);
-          },
+          onTap: () {},
           child: CarouselSlider(
             carouselController: carouselController,
-            items: payments
+            items: paymentcubit.paymentGates
                 .map((item) => PaymentWay(
-                      paymentName: item["name"],
-                      paymentImage: item["image"],
-                      paymentID: item["id"],
+                      paymentName: item.paymentName,
+                      paymentImage: item.image,
+                      paymentID: item.id,
                     ))
                 .toList(),
             options: CarouselOptions(
